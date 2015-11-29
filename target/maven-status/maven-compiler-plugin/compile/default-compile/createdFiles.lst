@@ -1,1 +1,9 @@
+com\betvictor\controller\DatabaseController.class
+com\betvictor\controller\HomeController.class
+com\betvictor\WebConfiguration.class
+com\betvictor\data\ProductServiceImpl.class
+com\betvictor\data\ProductService.class
+com\betvictor\data\ProductRepository.class
+com\betvictor\data\Product.class
+com\betvictor\WebSocketConfig.class
 com\betvictor\ActionmonitorApplication.class
