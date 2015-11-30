@@ -1,9 +1,9 @@
+com\betvictor\data\EmployeService.class
 com\betvictor\controller\DatabaseController.class
 com\betvictor\controller\HomeController.class
 com\betvictor\WebConfiguration.class
-com\betvictor\data\ProductServiceImpl.class
-com\betvictor\data\ProductService.class
-com\betvictor\data\ProductRepository.class
-com\betvictor\data\Product.class
+com\betvictor\data\EmployeRepository.class
+com\betvictor\data\Employe.class
 com\betvictor\WebSocketConfig.class
 com\betvictor\ActionmonitorApplication.class
+com\betvictor\data\EmployeServiceImpl.class

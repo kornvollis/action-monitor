@@ -21,7 +21,7 @@ Szevaszka
 
     <tbody>
 
-    <#list products as i>
+    <#list employes as i>
     <tr>
         <td>${i?index}: ${i.getName()}</td>
     </tr>
