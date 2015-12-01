@@ -26,8 +26,10 @@ public class EmployeeController {
 
     @RequestMapping(path = "/add",  method = RequestMethod.POST)
     @ResponseBody
-    public String add(@ModelAttribute Employee employee) {
+    public Employee add(@ModelAttribute Employee employee) {
 
-        return employee.toString();
+        employeService.save(employee);
+
+        return employee;
     }
 }

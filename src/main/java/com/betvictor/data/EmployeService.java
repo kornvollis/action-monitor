@@ -5,6 +5,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface EmployeService {
 
+    Employee save(Employee employee);
+
     Employee delete(Long id);
 
     Employee getProduct(String name);

@@ -74,10 +74,33 @@
 //    $('#add-modal').focus()
 //})
 $("#formSubmissonBtn").click(function() {
-    $("#addEmployeeForm").submit();
+    var url = "/employee/add"; // the script where you handle the form input.
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: $("#addEmployeeForm").serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+            debugger;
+            $("#addModal").modal("hide");
+
+            var row = $("<tr>");
+            var id = $("<td>").text(data.id);
+            var firstName = $("<td>").text(data.firstName);
+            var lastName = $("<td>").text(data.lastName);
+            var email = $("<td>").text(data.email);
+            var submitButton = $("<td>").append($("<button>").attr("class", "delete-button").attr("data-id", data.id).text("delete"));
+
+            row.append(id).append(firstName).append(lastName).append(email).append(submitButton);
+
+            $("#employees tbody").append(row);
+        }
+    });
+
 })
 
-$(".delete-button").click(function () {
+$("body").on("click", ".delete-button", function () {
     debugger;
     var button = $(this);
     var id = button.data("id");
