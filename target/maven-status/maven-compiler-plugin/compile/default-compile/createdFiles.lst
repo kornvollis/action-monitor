@@ -1,9 +1,10 @@
 com\betvictor\data\EmployeService.class
 com\betvictor\controller\DatabaseController.class
 com\betvictor\controller\HomeController.class
+com\betvictor\data\EmployeeRepository.class
 com\betvictor\WebConfiguration.class
-com\betvictor\data\EmployeRepository.class
-com\betvictor\data\Employe.class
+com\betvictor\controller\EmployeeController.class
+com\betvictor\data\EmployeeServiceImpl.class
+com\betvictor\data\Employee.class
 com\betvictor\WebSocketConfig.class
 com\betvictor\ActionmonitorApplication.class
-com\betvictor\data\EmployeServiceImpl.class

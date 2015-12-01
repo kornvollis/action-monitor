@@ -5,7 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.Repository;
 
-interface EmployeRepository extends Repository<Employe, Long> {
+interface EmployeeRepository extends Repository<Employee, Long> {
 
-    Page<Employe> findAll(Pageable pageable);
+    void delete(Employee deleted);
+
+    Employee findById(Long id);
+
+    Page<Employee> findAll(Pageable pageable);
 }

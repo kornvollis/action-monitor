@@ -5,7 +5,11 @@ import org.springframework.data.domain.Pageable;
 
 public interface EmployeService {
 
-    Employe getProduct(String name);
+    Employee delete(Long id);
 
-    Page<Employe> getAll(Pageable pageable);
+    Employee getProduct(String name);
+
+    Page<Employee> getAll(Pageable pageable);
+
+
 }

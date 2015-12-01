@@ -26,16 +26,16 @@
 
     <#include "employees.ftl">
 
-<#--<ul class="nav nav-tabs">-->
-    <#--<li role="presentation" class="active"><a href="#">Activity monitor</a>-->
-        <#--&lt;#&ndash;<#include "acitivityMonitor.ftl">&ndash;&gt;-->
-        <#--xxxx-->
-    <#--</li>-->
-    <#--<li role="presentation"><a href="#">Employees</a>-->
-        <#--&lt;#&ndash;<#include "employees.ftl">&ndash;&gt;-->
-        <#--yyyy-->
-    <#--</li>-->
-<#--</ul>-->
+    <#--<ul class="nav nav-tabs">-->
+        <#--<li role="presentation" class="active"><a href="#">Activity monitor</a>-->
+            <#--&lt;#&ndash;<#include "acitivityMonitor.ftl">&ndash;&gt;-->
+            <#--xxxx-->
+        <#--</li>-->
+        <#--<li role="presentation"><a href="#">Employees</a>-->
+            <#--&lt;#&ndash;<#include "employees.ftl">&ndash;&gt;-->
+            <#--yyyy-->
+        <#--</li>-->
+    <#--</ul>-->
 
 </body>
 </html>

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 
 @Entity
-public class Employe implements Serializable {
+public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,23 +26,34 @@ public class Employe implements Serializable {
     @Column(nullable = false)
     private String email;
 
-    protected Employe() {
+    protected Employee() {
     }
 
-    public Employe(String firstName, String lastName, String email) {
+    public Employee(String firstName, String lastName, String email) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEmail() {
@@ -51,5 +62,10 @@ public class Employe implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return getFirstName() + ", " + getLastName() + ", " + getEmail();
     }
 }
