@@ -29,6 +29,14 @@ public class Employee implements Serializable {
     protected Employee() {
     }
 
+    public Employee(Long id, String firstName, String lastName, String email) {
+        super();
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public Employee(String firstName, String lastName, String email) {
         super();
         this.firstName = firstName;
@@ -58,6 +66,10 @@ public class Employee implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setId(Long value) {
+        this.id = id;
     }
 
     public Long getId() {

@@ -24,6 +24,11 @@ class EmployeeServiceImpl implements EmployeService {
     }
 
     @Override
+    public Employee findOne(Long primaryKey) {
+        return employeeRepository.findById(primaryKey);
+    }
+
+    @Override
     public Employee delete(Long id) {
         Employee employee = employeeRepository.findById(id);
         employeeRepository.delete(employee);

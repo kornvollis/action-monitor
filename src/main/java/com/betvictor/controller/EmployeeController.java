@@ -32,4 +32,18 @@ public class EmployeeController {
 
         return employee;
     }
+
+    @RequestMapping(path = "/update/{id}",  method = RequestMethod.POST)
+    public String update(@PathVariable Long id,  @RequestBody Employee employee) {
+
+        Employee emp = employeService.findOne(id);
+
+        emp.setFirstName(employee.getFirstName());
+        emp.setLastName(employee.getLastName());
+        emp.setEmail(employee.getEmail());
+
+        employeService.save(emp);
+
+        return "success";
+    }
 }
