@@ -34,7 +34,8 @@ public class EmployeeController {
     }
 
     @RequestMapping(path = "/update/{id}",  method = RequestMethod.POST)
-    public String update(@PathVariable Long id,  @RequestBody Employee employee) {
+    @ResponseBody
+    public Employee update(@PathVariable Long id,  @RequestBody Employee employee) {
 
         Employee emp = employeService.findOne(id);
 
@@ -44,6 +45,6 @@ public class EmployeeController {
 
         employeService.save(emp);
 
-        return "success";
+        return emp;
     }
 }

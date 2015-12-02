@@ -11,7 +11,7 @@
     <tbody>
 
     <#list employes as i>
-    <tr>
+    <tr data-id="${i.getId()}">
         <#--<td>${i?index}</td>-->
         <td>${i.getId()}</td>
         <td>${i.getFirstName()}</td>
@@ -19,7 +19,7 @@
         <td>${i.getEmail()}</td>
         <td>
             <button class="delete-button" data-id="${i.getId()}">delete</button> |
-            <button class="update-button" data-id="${i.getId()}" data-firstName="${i.getFirstName()}" data-lastName="${i.getLastName()}" data-email="${i.getEmail()}" data-toggle="modal" data-target="#updateModal" >update</button>
+            <button class="update-button" data-id="${i.getId()}" data-toggle="modal" data-target="#updateModal" >update</button>
         </td>
             <#--<a href="/employee/delete/${i.getId()}">delete</a>-->
     </tr>
@@ -82,7 +82,7 @@
 
                 <form id="updateEmployeeForm" class="form-horizontal" action="/employee/update" method="post">
 
-                    <input type="text" name="id" hidden />
+                    <input type="text" name="id" style="display: none" />
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">First name</label>
@@ -115,6 +115,13 @@
 
 <script>
 
+function updateEmployee(employee) {
+    var cols = $("tr[data-id = "+employee.id + "] td");
+    $(cols[1]).text(employee.firstName);
+    $(cols[2]).text(employee.lastName);
+    $(cols[3]).text(employee.email);
+}
+
 $("#updateFormSubmissonBtn").on("click", function() {
 
     var url = "/employee/update/" + $("#updateEmployeeForm input[name ='id']" ).val(); // the script where you handle the form input.
@@ -126,32 +133,24 @@ $("#updateFormSubmissonBtn").on("click", function() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        data: $("#updateEmployeeForm").serialize(), // serializes the form's elements.
-//        data: '{"id":"9","firstName":"Jeremy","lastName":"Ashkenas","email":"jeremya@yahoo.com"}',
+        data: JSON.stringify($("#updateEmployeeForm").serializeObject()), // serializes the form's elements.
         success: function(data)
         {
             $("#updateModal").modal("hide");
+            updateEmployee(data);
             alert("success");
-//            var row = $("<tr>");
-//            var id = $("<td>").text(data.id);
-//            var firstName = $("<td>").text(data.firstName);
-//            var lastName = $("<td>").text(data.lastName);
-//            var email = $("<td>").text(data.email);
-//            var submitButton = $("<td>").append($("<button>").attr("class", "delete-button").attr("data-id", data.id).text("delete"));
-//
-//            row.append(id).append(firstName).append(lastName).append(email).append(submitButton);
-//
-//            $("#employees tbody").append(row);
         }
     });
-})
+});
 
 $("body").on("click", ".update-button", function() {
-    debugger;
-    var id = $(this).data("id");
-    var firstName = $(this).data("firstname");
-    var lastName = $(this).data("lastname");
-    var email = $(this).data("email");
+    var employeeId = $(this).data("id");
+    var cols = $("tr[data-id = " + employeeId + "] td");
+
+    var id = $(cols[0]).text();
+    var firstName = $(cols[1]).text();
+    var lastName = $(cols[2]).text();
+    var email = $(cols[3]).text();
 
     var populateUpdateForm = function() {
         $("#updateEmployeeForm input[name='id']").val(id);
@@ -161,29 +160,6 @@ $("body").on("click", ".update-button", function() {
     }
 
     populateUpdateForm();
-/*
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: $("#addEmployeeForm").serialize(), // serializes the form's elements.
-        success: function(data)
-        {
-            debugger;
-            $("#addModal").modal("hide");
-
-            var row = $("<tr>");
-            var id = $("<td>").text(data.id);
-            var firstName = $("<td>").text(data.firstName);
-            var lastName = $("<td>").text(data.lastName);
-            var email = $("<td>").text(data.email);
-            var submitButton = $("<td>").append($("<button>").attr("class", "delete-button").attr("data-id", data.id).text("delete"));
-
-            row.append(id).append(firstName).append(lastName).append(email).append(submitButton);
-
-            $("#employees tbody").append(row);
-        }
-    });
-*/
 });
 
 $("#formSubmissonBtn").click(function() {
@@ -195,38 +171,30 @@ $("#formSubmissonBtn").click(function() {
         data: $("#addEmployeeForm").serialize(), // serializes the form's elements.
         success: function(data)
         {
-            debugger;
             $("#addModal").modal("hide");
 
-            var row = $("<tr>");
+            var row = $("<tr>").attr("data-id", data.id);
             var id = $("<td>").text(data.id);
             var firstName = $("<td>").text(data.firstName);
             var lastName = $("<td>").text(data.lastName);
             var email = $("<td>").text(data.email);
-            var submitButton = $("<td>").append($("<button>").attr("class", "delete-button").attr("data-id", data.id).text("delete"));
+            var submitButton = $("<td>").append($("<button>").attr("class", "delete-button").attr("data-id", data.id).text("delete"))
+                    .append(" | ").append($("<button>").attr("class", "update-button").attr("data-id", data.id).attr("data-toggle", "modal").attr("data-target", "#updateModal").text("update"));
 
             row.append(id).append(firstName).append(lastName).append(email).append(submitButton);
 
             $("#employees tbody").append(row);
         }
     });
-})
+});
 
 $("body").on("click", ".delete-button", function () {
-    debugger;
     var button = $(this);
-    var id = button.data("id");
+    var id = button.closest("tr").data("id");
     $.get("/employee/delete/" + id, function () {
-        button.parent().parent().remove();
-        //alert("success");
+        button.closest("tr").remove();
     })
-            .done(function () {
-                //alert("second success");
-            })
-            .fail(function () {
-                //alert("error");
-            })
-})
+});
 
 $.fn.serializeObject = function()
 {
@@ -244,12 +212,4 @@ $.fn.serializeObject = function()
     });
     return o;
 };
-
-$(function() {
-    $('form').submit(function() {
-        $('#result').text(JSON.stringify($('form').serializeObject()));
-        return false;
-    });
-});
-
 </script>
