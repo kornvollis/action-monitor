@@ -23,16 +23,7 @@ public class HomeController {
     public String home(Map<String, Object> model) {
 
         logger.info("Home controller");
-
-        List<Employee> employees = employeService.getAll(null).getContent();
-        StringBuilder sb = new StringBuilder();
-
-        for(int i = 0; i< employees.size(); i++) {
-            sb.append(employees.get(i).getFirstName());
-            sb.append("/n");
-        }
-
-        model.put("employes", employees);
+        
         return "home";
     }
 }

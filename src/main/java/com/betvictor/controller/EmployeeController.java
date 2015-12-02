@@ -6,16 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/employee")
 public class EmployeeController {
 
     @Autowired
     EmployeService employeService;
 
-    @RequestMapping(path = "/delete/{id}",  method = RequestMethod.GET)
+    @RequestMapping("/employee")
+    public String home(Map<String, Object> model) {
+
+        List<Employee> employees = employeService.getAll(null).getContent();
+
+        model.put("employes", employees);
+        return "employee_list";
+    }
+
+    @RequestMapping(path = "/employee/delete/{id}",  method = RequestMethod.GET)
     @ResponseBody
     public String delete(@PathVariable Long id) {
 
@@ -24,7 +33,7 @@ public class EmployeeController {
         return "deleted";
     }
 
-    @RequestMapping(path = "/add",  method = RequestMethod.POST)
+    @RequestMapping(path = "/employee/add",  method = RequestMethod.POST)
     @ResponseBody
     public Employee add(@ModelAttribute Employee employee) {
 
@@ -33,7 +42,7 @@ public class EmployeeController {
         return employee;
     }
 
-    @RequestMapping(path = "/update/{id}",  method = RequestMethod.POST)
+    @RequestMapping(path = "/employee/update/{id}",  method = RequestMethod.POST)
     @ResponseBody
     public Employee update(@PathVariable Long id,  @RequestBody Employee employee) {
 
