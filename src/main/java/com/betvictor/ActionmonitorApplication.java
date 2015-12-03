@@ -12,13 +12,13 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration
 @SpringBootApplication
 @EnableWebSocket
-public class ActionmonitorApplication extends SpringBootServletInitializer
+public class ActionMonitorApplication extends SpringBootServletInitializer
         implements WebSocketConfigurer {
 
 
 
     public static void main(String[] args) {
-        SpringApplication.run(ActionmonitorApplication.class, args);
+        SpringApplication.run(ActionMonitorApplication.class, args);
     }
 
     @Override
@@ -27,12 +27,7 @@ public class ActionmonitorApplication extends SpringBootServletInitializer
     }
 
     @Bean
-    public EchoService echoService() {
-        return new DefaultEchoService("Did you say \"%s\"?");
-    }
-
-    @Bean
     public WebSocketHandler echoWebSocketHandler() {
-        return new WebSocketHandler(echoService());
+        return new WebSocketHandler();
     }
 }

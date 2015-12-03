@@ -27,14 +27,11 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class WebSocketHandler extends TextWebSocketHandler {
 
 	private static Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
-
-	private final EchoService echoService;
 
     private List<WebSocketSession> sessions;
 
@@ -52,8 +49,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 
 	@Autowired
-	public WebSocketHandler(EchoService echoService) {
-		this.echoService = echoService;
+	public WebSocketHandler() {
         sessions = new ArrayList<WebSocketSession>();
 	}
 
@@ -66,7 +62,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message)
 			throws Exception {
-//		String echoMessage = this.echoService.getMessage(message.getPayload());
 		logger.debug("echoMessage");
 		session.sendMessage(new TextMessage("echoMessage"));
 	}

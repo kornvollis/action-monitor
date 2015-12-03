@@ -1,12 +1,9 @@
-com\betvictor\controller\DatabaseController.class
-com\betvictor\DefaultEchoService.class
-com\betvictor\controller\MainController.class
-com\betvictor\WebSocketHandler.class
 com\betvictor\data\EmployeService.class
 com\betvictor\data\EmployeeRepository.class
 com\betvictor\WebConfiguration.class
+com\betvictor\controller\MainController.class
+com\betvictor\ActionMonitorApplication.class
 com\betvictor\controller\EmployeeController.class
 com\betvictor\data\EmployeeServiceImpl.class
 com\betvictor\data\Employee.class
-com\betvictor\EchoService.class
-com\betvictor\ActionmonitorApplication.class
+com\betvictor\WebSocketHandler.class

@@ -21,7 +21,7 @@ public class EmployeeController {
     @Autowired
     WebSocketHandler webSocketHandler;
 
-    @RequestMapping(value = { "/","/employee" })
+    @RequestMapping(value = {"/", "/employee"})
     public String show(Map<String, Object> model) {
 
         List<Employee> employees = employeService.getAll(null).getContent();
@@ -30,7 +30,7 @@ public class EmployeeController {
         return "home";
     }
 
-    @RequestMapping(path = "/employee/delete/{id}",  method = RequestMethod.GET)
+    @RequestMapping(path = "/employee/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String delete(@PathVariable Long id) {
 
@@ -42,7 +42,7 @@ public class EmployeeController {
         return "deleted";
     }
 
-    @RequestMapping(path = "/employee/add",  method = RequestMethod.POST)
+    @RequestMapping(path = "/employee/add", method = RequestMethod.POST)
     @ResponseBody
     public Employee add(@ModelAttribute Employee employee) {
 
@@ -53,9 +53,9 @@ public class EmployeeController {
         return employee;
     }
 
-    @RequestMapping(path = "/employee/update/{id}",  method = RequestMethod.POST)
+    @RequestMapping(path = "/employee/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Employee update(@PathVariable Long id,  @RequestBody Employee employee) {
+    public Employee update(@PathVariable Long id, @RequestBody Employee employee) {
 
         Employee emp = employeService.findOne(id);
 

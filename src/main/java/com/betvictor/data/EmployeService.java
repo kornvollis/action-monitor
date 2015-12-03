@@ -11,8 +11,6 @@ public interface EmployeService {
 
     Employee delete(Long id);
 
-    Employee getProduct(String name);
-
     Page<Employee> getAll(Pageable pageable);
 
 

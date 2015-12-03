@@ -138,7 +138,6 @@ $("#updateFormSubmissonBtn").on("click", function() {
         {
             $("#updateModal").modal("hide");
             updateEmployee(data);
-            alert("success");
         }
     });
 });

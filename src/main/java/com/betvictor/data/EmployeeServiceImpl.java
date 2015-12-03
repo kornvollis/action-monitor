@@ -37,11 +37,6 @@ class EmployeeServiceImpl implements EmployeService {
     }
 
     @Override
-    public Employee getProduct(String name) {
-        return null;
-    }
-
-    @Override
     public Page<Employee> getAll(Pageable pageable) {
         return this.employeeRepository.findAll(null);
     }
