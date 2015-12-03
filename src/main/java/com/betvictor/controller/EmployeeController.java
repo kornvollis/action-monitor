@@ -1,11 +1,14 @@
 package com.betvictor.controller;
 
+import com.betvictor.WebSocketHandler;
 import com.betvictor.data.EmployeService;
 import com.betvictor.data.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.socket.TextMessage;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -15,20 +18,26 @@ public class EmployeeController {
     @Autowired
     EmployeService employeService;
 
-    @RequestMapping("/employee")
-    public String home(Map<String, Object> model) {
+    @Autowired
+    WebSocketHandler webSocketHandler;
+
+    @RequestMapping(value = { "/","/employee" })
+    public String show(Map<String, Object> model) {
 
         List<Employee> employees = employeService.getAll(null).getContent();
 
         model.put("employes", employees);
-        return "employee_list";
+        return "home";
     }
 
     @RequestMapping(path = "/employee/delete/{id}",  method = RequestMethod.GET)
     @ResponseBody
     public String delete(@PathVariable Long id) {
 
+        Employee emp = employeService.findOne(id);
         employeService.delete(id);
+
+        webSocketHandler.broadcastDelete(emp);
 
         return "deleted";
     }
@@ -39,6 +48,8 @@ public class EmployeeController {
 
         employeService.save(employee);
 
+        webSocketHandler.broadcastAdd(employee);
+
         return employee;
     }
 
@@ -47,6 +58,8 @@ public class EmployeeController {
     public Employee update(@PathVariable Long id,  @RequestBody Employee employee) {
 
         Employee emp = employeService.findOne(id);
+
+        webSocketHandler.broadcastUpdated(emp, employee);
 
         emp.setFirstName(employee.getFirstName());
         emp.setLastName(employee.getLastName());

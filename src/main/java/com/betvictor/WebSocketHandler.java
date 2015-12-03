@@ -16,39 +16,51 @@
 
 package com.betvictor;
 
+import com.betvictor.data.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-/**
- * Echo messages by implementing a Spring {@link WebSocketHandler} abstraction.
- */
-public class EchoWebSocketHandler extends TextWebSocketHandler {
+public class WebSocketHandler extends TextWebSocketHandler {
 
-	private static Logger logger = LoggerFactory.getLogger(EchoWebSocketHandler.class);
+	private static Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
 
 	private final EchoService echoService;
 
+    private List<WebSocketSession> sessions;
+
+    public void broadcastMessage(String message) {
+        for(WebSocketSession session : sessions) {
+            try {
+                if(session.isOpen()){
+                    session.sendMessage(new TextMessage(message));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 	@Autowired
-	public EchoWebSocketHandler(EchoService echoService) {
+	public WebSocketHandler(EchoService echoService) {
 		this.echoService = echoService;
+        sessions = new ArrayList<WebSocketSession>();
 	}
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
 		logger.debug("Opened new session in instance " + this);
-		try {
-			session.sendMessage(new TextMessage("test"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        sessions.add(session);
 	}
 
 	@Override
@@ -65,4 +77,28 @@ public class EchoWebSocketHandler extends TextWebSocketHandler {
 		session.close(CloseStatus.SERVER_ERROR);
 	}
 
+    public void broadcastDelete(Employee employee) {
+        StringBuilder message = new StringBuilder();
+        message.append(employee.toString());
+        message.append(" | deleted");
+
+        broadcastMessage(message.toString());
+    }
+
+    public void broadcastAdd(Employee employee) {
+        StringBuilder message = new StringBuilder();
+        message.append(employee.toString());
+        message.append(" | added");
+
+        broadcastMessage(message.toString());
+    }
+
+    public void broadcastUpdated(Employee from, Employee to) {
+        StringBuilder message = new StringBuilder();
+        message.append(from.toString());
+        message.append(" | updated | ");
+        message.append(to.toString());
+
+        broadcastMessage(message.toString());
+    }
 }

@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
@@ -15,6 +14,8 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 public class ActionmonitorApplication extends SpringBootServletInitializer
         implements WebSocketConfigurer {
+
+
 
     public static void main(String[] args) {
         SpringApplication.run(ActionmonitorApplication.class, args);
@@ -32,6 +33,6 @@ public class ActionmonitorApplication extends SpringBootServletInitializer
 
     @Bean
     public WebSocketHandler echoWebSocketHandler() {
-        return new EchoWebSocketHandler(echoService());
+        return new WebSocketHandler(echoService());
     }
 }
