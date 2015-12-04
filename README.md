@@ -12,10 +12,10 @@ http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.h
 ### How to build the application
 mvn install
 
-### How to run the application:
+### How to run the application
 mvn spring-boot:run
 
-### How to access the application:
+### How to access the application
 localhost:8080
 
 ### Pages
