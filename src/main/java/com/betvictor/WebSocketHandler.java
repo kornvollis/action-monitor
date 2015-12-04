@@ -88,11 +88,10 @@ public class WebSocketHandler extends TextWebSocketHandler {
         broadcastMessage(message.toString());
     }
 
-    public void broadcastUpdated(Employee from, Employee to) {
+    public void broadcastUpdated(Employee employee) {
         StringBuilder message = new StringBuilder();
-        message.append(from.toString());
-        message.append(" | updated | ");
-        message.append(to.toString());
+        message.append(employee.toString());
+        message.append(" | updated ");
 
         broadcastMessage(message.toString());
     }

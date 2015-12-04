@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component("productService")
 @Transactional
-class EmployeeServiceImpl implements EmployeService {
+class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 

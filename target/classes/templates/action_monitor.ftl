@@ -9,10 +9,9 @@
         var ws = null;
 
         function connect() {
-            var target = "/echo";
+            var target = "/monitor";
             ws = new SockJS(target);
             ws.onopen = function () {
-                debugger;
                 log('Info: WebSocket connection opened.');
             };
             ws.onmessage = function (event) {
@@ -29,7 +28,6 @@
                 ws.close();
                 ws = null;
             }
-            setConnected(false);
         }
 
         function log(message) {

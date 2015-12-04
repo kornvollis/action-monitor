@@ -1,4 +1,4 @@
-com\betvictor\data\EmployeService.class
+com\betvictor\data\EmployeeService.class
 com\betvictor\data\EmployeeRepository.class
 com\betvictor\WebConfiguration.class
 com\betvictor\controller\MainController.class

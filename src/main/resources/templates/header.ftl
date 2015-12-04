@@ -1,7 +1,7 @@
 <#import "/spring.ftl" as spring />
 <#assign home><@spring.url relativeUrl="/"/></#assign>
 
-<#assign bootstrapCss><@spring.url relativeUrl="/css/bootstrap.min.css"/></#assign>
+<#--<#assign bootstrapCss><@spring.url relativeUrl="/css/bootstrap.min.css"/></#assign>-->
 <#assign bootstrapJs><@spring.url relativeUrl="/js/bootstrap.min.js"/></#assign>
 <#assign jquery><@spring.url relativeUrl="/js/jquery-2.1.4.min.js"/></#assign>
 

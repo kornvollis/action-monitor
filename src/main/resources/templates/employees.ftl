@@ -10,9 +10,8 @@
 
     <tbody>
 
-    <#list employes as i>
+    <#list employees as i>
     <tr data-id="${i.getId()}">
-        <#--<td>${i?index}</td>-->
         <td>${i.getId()}</td>
         <td>${i.getFirstName()}</td>
         <td>${i.getLastName()}</td>
@@ -21,7 +20,6 @@
             <button class="delete-button" data-id="${i.getId()}">delete</button> |
             <button class="update-button" data-id="${i.getId()}" data-toggle="modal" data-target="#updateModal" >update</button>
         </td>
-            <#--<a href="/employee/delete/${i.getId()}">delete</a>-->
     </tr>
     </#list>
 

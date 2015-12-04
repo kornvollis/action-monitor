@@ -16,18 +16,17 @@ public class ActionMonitorApplication extends SpringBootServletInitializer
         implements WebSocketConfigurer {
 
 
-
     public static void main(String[] args) {
         SpringApplication.run(ActionMonitorApplication.class, args);
     }
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(echoWebSocketHandler(), "/echo").withSockJS();
+        registry.addHandler(webSocketHandler(), "/monitor").withSockJS();
     }
 
     @Bean
-    public WebSocketHandler echoWebSocketHandler() {
+    public WebSocketHandler webSocketHandler() {
         return new WebSocketHandler();
     }
 }

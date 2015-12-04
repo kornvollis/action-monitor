@@ -2,10 +2,7 @@ package com.betvictor.data;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -14,7 +11,7 @@ public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -44,40 +41,40 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getFirstName() {
         return firstName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setId(Long value) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long value) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return getFirstName() + ", " + getLastName() + ", " + getEmail();
+        return "{id: " + getId() + ", firstName: " + getFirstName() + ", lastName: " + getLastName() + ", email: " + getEmail() + "}";
     }
 }
